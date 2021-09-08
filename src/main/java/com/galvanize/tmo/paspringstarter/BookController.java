@@ -32,17 +32,11 @@ public class BookController {
     }
 
     @GetMapping(
-            value = "findall",
             produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
             headers = "Accept=application/json"
     )
-    public ResponseEntity<Iterable<Book>> read() {
-        try {
-            return new ResponseEntity<Iterable<Book>>(service.readAll(), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<Iterable<Book>>(HttpStatus.BAD_REQUEST);
-        }
-        // return service.readAll();
+    public @ResponseBody List<Book> read() {
+        return service.readAll();
     }
 
     @DeleteMapping
