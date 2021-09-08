@@ -21,7 +21,12 @@ public class BookService {
     private AtomicLong sequence = new AtomicLong(0);
 
     public List<Book> readAll() {
-        return repository.values().stream().collect(Collectors.toList());
+        return repository.values().stream().sorted(new Comparator<Book>() {
+            @Override
+            public int compare(Book o1, Book o2) {
+                return o1.getTitle().compareTo(o2.getTitle());
+            }
+        }).collect(Collectors.toList());
     }
 
     public Book read(Long id) {

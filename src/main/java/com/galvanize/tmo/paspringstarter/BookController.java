@@ -2,14 +2,13 @@ package com.galvanize.tmo.paspringstarter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -32,8 +31,7 @@ public class BookController {
     }
 
     @GetMapping(
-            produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
-            headers = "Accept=application/json"
+            produces = MediaType.APPLICATION_JSON_VALUE
     )
     public @ResponseBody List<Book> read() {
         return service.readAll();
