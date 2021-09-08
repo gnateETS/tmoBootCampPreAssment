@@ -1,7 +1,9 @@
 package com.galvanize.tmo.paspringstarter;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -28,9 +30,18 @@ public class BookController {
         return ResponseEntity.created(uri).body(createdBook);
     }
 
-    @GetMapping
-    public List<Book> read() {
-        return service.readAll();
+    @GetMapping(
+            value = "findall",
+            produces = { MimeTypeUtils.APPLICATION_JSON_VALUE },
+            headers = "Accept=application/json"
+    )
+    public ResponseEntity<Iterable<Book>> read() {
+        try {
+            return new ResponseEntity<Iterable<Book>>(service.readAll(), HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<Iterable<Book>>(HttpStatus.BAD_REQUEST);
+        }
+        // return service.readAll();
     }
 
     @DeleteMapping

@@ -39,6 +39,7 @@ public class BookService {
     }
 
     public void deleteAll() {
+        sequence.set(0);
         repository = Arrays.asList(new Book[] {}).stream()
                 .collect(Collectors.toMap(b-> b.getId(), Function.identity()));
     }
