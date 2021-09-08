@@ -2,10 +2,11 @@ package com.galvanize.tmo.paspringstarter;
 
 public class Book {
 
+    private long id;
     private String author;
     private String title;
     private int yearPublished;
-    private long id;
+
 
     public Book() {}
 
