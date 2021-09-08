@@ -12,7 +12,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/books")
+@RequestMapping("api/books")
 public class BookController {
 
     @Autowired
