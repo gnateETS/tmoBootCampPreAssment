@@ -45,6 +45,7 @@ public class BookController {
     }
 
     @DeleteMapping
+    @ResponseStatus(value = HttpStatus.NO_CONTENT)
     public void deleteAll() {
         service.deleteAll();
     }
