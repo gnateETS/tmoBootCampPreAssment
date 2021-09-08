@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 @Service
 public class BookService {
 
+    private String BASE_URL = System.getenv("BASE_URL");
+
     private Map<Long, Book> repository = Arrays.asList(new Book[] {}).stream()
             .collect(Collectors.toMap(b-> b.getId(), Function.identity()));
 
