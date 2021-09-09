@@ -32,14 +32,8 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> read() {
-        List<Book> bookList = service.readAll();
-        if (bookList != null && bookList.size() > 0) {
-            return new ResponseEntity<>( bookList, HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
-        }
+    public Map<String,List<Book>> read() {
+        return service.readAll();
     }
 
     @DeleteMapping

@@ -2,10 +2,7 @@ package com.galvanize.tmo.paspringstarter;
 
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -20,13 +17,18 @@ public class BookService {
 
     private AtomicLong sequence = new AtomicLong(0);
 
-    public List<Book> readAll() {
-        return repository.values().stream().sorted(new Comparator<Book>() {
+    public Map<String, List<Book>> readAll() {
+
+       List<Book> books = repository.values().stream().sorted(new Comparator<Book>() {
             @Override
             public int compare(Book o1, Book o2) {
                 return o1.getTitle().compareTo(o2.getTitle());
             }
         }).collect(Collectors.toList());
+
+        Map<String, List<Book>> mapped =  new HashMap<String, List<Book>>();
+        mapped.put("books", books);
+        return mapped;
     }
 
     public Book read(Long id) {
