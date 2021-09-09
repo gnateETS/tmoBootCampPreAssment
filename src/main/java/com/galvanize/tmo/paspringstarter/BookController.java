@@ -10,6 +10,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("api/books")
@@ -33,7 +34,8 @@ public class BookController {
     @GetMapping(
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public @ResponseBody List<Book> read() {
+    public @ResponseBody
+    Map<Long,Book> read() {
         return service.readAll();
     }
 

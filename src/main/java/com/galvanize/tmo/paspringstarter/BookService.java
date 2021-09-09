@@ -20,13 +20,13 @@ public class BookService {
 
     private AtomicLong sequence = new AtomicLong(0);
 
-    public List<Book> readAll() {
+    public Map<Long,Book> readAll() {
         return repository.values().stream().sorted(new Comparator<Book>() {
             @Override
             public int compare(Book o1, Book o2) {
                 return o1.getTitle().compareTo(o2.getTitle());
             }
-        }).collect(Collectors.toList());
+        }).collect(Collectors.toMap(b-> b.getId(), Function.identity()));
     }
 
     public Book read(Long id) {
