@@ -31,12 +31,15 @@ public class BookController {
         return ResponseEntity.created(uri).body(createdBook);
     }
 
-    @GetMapping(
-            produces = MediaType.APPLICATION_JSON_VALUE
-    )
-    public @ResponseBody
-    Map<Long,Book> read() {
-        return service.readAll();
+    @GetMapping
+    public ResponseEntity<List<Book>> read() {
+        List<Book> bookList = service.readAll();
+        if (bookList != null && bookList.size() > 0) {
+            return new ResponseEntity<>( bookList, HttpStatus.OK);
+        }
+        else {
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
+        }
     }
 
     @DeleteMapping
